@@ -45,17 +45,12 @@ class Manage extends Template
         return $this->customerSession->getId();
     }
 
-    public function getReferralLink()
-    {
-        $getCustomerId = $this->getCustomerId();
-        $points = 'refurl' . $getCustomerId;
-        return $points;
-    }
-
     public function getCustomerId()
     {
         $sessionCustomerId = $this->customerSession->getCustomer()->getId();
-        return $this->repository->getById((int)$sessionCustomerId);
+        $repository_data = $this->repository->getById((int)$sessionCustomerId);
+
+        return $repository_data;
     }
 
     public function getCustomers()

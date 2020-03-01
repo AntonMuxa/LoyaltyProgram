@@ -7,7 +7,7 @@ use Alevel\LoyaltyProgram\Api\Repository\LoyaltyProgramRepositoryInterface;
 use Alevel\LoyaltyProgram\Model\ResourceModel\LoyaltyProgram as ResourceModel;
 use Alevel\LoyaltyProgram\Model\ResourceModel\LoyaltyProgram\Collection;
 use Alevel\LoyaltyProgram\Model\ResourceModel\LoyaltyProgram\CollectionFactory;
-use Magento\Framework\Data\Collection\ModelFactory;
+use Alevel\LoyaltyProgram\Model\LoyaltyProgramFactory as ModelFactory;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\SearchResultsInterface;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
