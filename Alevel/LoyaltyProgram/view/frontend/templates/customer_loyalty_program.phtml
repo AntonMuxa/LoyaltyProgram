@@ -1,8 +1,12 @@
 <?php
 /** @var Alevel\LoyaltyProgram\Block\Manage $block*/
 ?>
-<?php echo 'getPoints ' . $block->getPoints(); ?><br>
-<?php echo 'getSessionCustomerId ' . $block->getSessionCustomerId(); ?><br>
-<?php echo 'getCustomerId ' . $block->getCustomerId(); ?><br>
-<?php echo 'getCustomers ' . $block->getCustomers(); ?><br>
+<?php echo 'getPoints ' . $block->getPoints(); ?><br><br>
+<?php echo 'getSessionCustomerId ' . $block->getSessionCustomerId(); ?><br><br>
+<?php echo 'getCustomerById ' . print_r($block->getCustomerById()); ?><br><br>
+<?php echo 'getCustomers '; ?>
+<?php foreach ($block->getCustomers() as $item) : ?>
+    <span><?php echo $item->getData('email'); ?></span><br/>
+<?php endforeach; ?>
+    <br><br>
 <?php echo 'this loyalty'; ?>

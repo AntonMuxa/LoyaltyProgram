@@ -2,7 +2,7 @@
 
 namespace Alevel\LoyaltyProgram\Repository;
 
-use Alevel\LoyaltyProgram\Api\Repository\LoyaltyProgramInterface;
+use Alevel\LoyaltyProgram\Api\Model\LoyaltyProgramInterface;
 use Alevel\LoyaltyProgram\Api\Repository\LoyaltyProgramRepositoryInterface;
 use Alevel\LoyaltyProgram\Model\ResourceModel\LoyaltyProgram as ResourceModel;
 use Alevel\LoyaltyProgram\Model\ResourceModel\LoyaltyProgram\Collection;
@@ -17,14 +17,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 //use Alevel\LoyaltyProgram\Api\Repository\SearchResultsInterface;
 //use Alevel\LoyaltyProgram\Model\LoyaltyProgram;
 //use Alevel\LoyaltyProgram\Model\LoyaltyProgramFactory as FactoryModel;
-
-
-
-
-
-
-
-
 
 class LoyaltyProgramRepository implements LoyaltyProgramRepositoryInterface
 {
@@ -76,6 +68,8 @@ class LoyaltyProgramRepository implements LoyaltyProgramRepositoryInterface
         if(empty($customer->getId())) {
             throw new NoSuchEntityException(__('Customer %1 not found', $id));
         }
+
+        return $customer;
     }
 
     /**
@@ -88,9 +82,9 @@ class LoyaltyProgramRepository implements LoyaltyProgramRepositoryInterface
         $this->processor->process($searchCriteria, $collection);
         /** @var SearchResultsInterface $searchResult */
         $searchResult = $this->searchResultsFactory->create();
-        $searchResult->setCriteria($searchCriteria);
+        $searchResult->setSearchCriteria($searchCriteria);
         $searchResult->setTotalCount($collection->getSize());
-        $searchResult->setItem($collection->getData());
+        $searchResult->setItems($collection->getItems());
 
         return $searchResult;
     }

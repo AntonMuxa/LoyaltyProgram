@@ -45,19 +45,19 @@ class Manage extends Template
         return $this->customerSession->getId();
     }
 
-    public function getCustomerId()
+    public function getCustomerById()
     {
         $sessionCustomerId = $this->customerSession->getCustomer()->getId();
-        $repository_data = $this->repository->getById((int)$sessionCustomerId);
-
-        return $repository_data;
+        $customerData = $this->repository->getById((int)$sessionCustomerId);
+        $customerInfo = $customerData->getData();
+        return $customerInfo;
     }
 
     public function getCustomers()
     {
         $searchCriteria = $this->searchCriteriaBuilder->create();
-
-        $customers = $this->repository->getList($searchCriteria);
+        //$searchCriteria->getSelect()->__toString();
+        $customers = $this->repository->getList($searchCriteria)->getItems();
 
         return $customers;
     }

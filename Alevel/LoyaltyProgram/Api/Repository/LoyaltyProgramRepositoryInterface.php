@@ -3,7 +3,7 @@
 
 namespace Alevel\LoyaltyProgram\Api\Repository;
 
-
+use ALevel\LoyaltyProgram\Api\Model\LoyaltyProgramInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\SearchResultsInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
