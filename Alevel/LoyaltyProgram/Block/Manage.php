@@ -1,18 +1,15 @@
 <?php
 
-
 namespace Alevel\LoyaltyProgram\Block;
 
-use Alevel\LoyaltyProgram\Api\Repository\LoyaltyProgramRepositoryInterface;
+use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
-use Magento\Framework\Api\SearchCriteriaBuilder;
-
 
 class Manage extends Template
 {
-
     private $repository;
     /**
      * @var \Magento\Customer\Model\Session
@@ -24,9 +21,8 @@ class Manage extends Template
     public function __construct(
         Context $context,
         CustomerSession $customerSession,
-        LoyaltyProgramRepositoryInterface $repository,
+        CustomerRepositoryInterface $repository,
         SearchCriteriaBuilder $searchCriteriaBuilder
-
     ) {
         parent::__construct($context);
         $this->customerSession = $customerSession;
@@ -47,19 +43,14 @@ class Manage extends Template
 
     public function getCustomerById()
     {
-        $sessionCustomerId = $this->customerSession->getCustomer()->getId();
+        $sessionCustomerId = $this->getSessionCustomerId();
+        //$customerInfa = $this->customerSession->getCustomerData();
         $customerData = $this->repository->getById((int)$sessionCustomerId);
-        $customerInfo = $customerData->getData();
-        return $customerInfo;
+        //$customerInfo = $customerData->getData();
+        $getCustomAttributes = $customerData->getCustomAttributes();
+        $getCustomAttributes = $getCustomAttributes;
+        $customerData = $customerData;
+
+        return $customerData;
     }
-
-    public function getCustomers()
-    {
-        $searchCriteria = $this->searchCriteriaBuilder->create();
-        //$searchCriteria->getSelect()->__toString();
-        $customers = $this->repository->getList($searchCriteria)->getItems();
-
-        return $customers;
-    }
-
 }
