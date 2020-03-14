@@ -16,11 +16,4 @@ interface LoyaltyProgramRepositoryInterface
      * @return LoyaltyProgramInterface
      */
     public function getById(int $id) : LoyaltyProgramInterface;
-
-    /**
-     * @param SearchCriteriaInterface $searchCriteria
-     * @return SearchResultInterface
-     */
-    public function getList(SearchCriteriaInterface $searchCriteria) : SearchResultsInterface;
-
 }

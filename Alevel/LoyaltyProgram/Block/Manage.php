@@ -2,7 +2,7 @@
 
 namespace Alevel\LoyaltyProgram\Block;
 
-use Magento\Customer\Api\CustomerRepositoryInterface;
+use Alevel\LoyaltyProgram\Api\Repository\LoyaltyProgramRepositoryInterface;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\View\Element\Template;
@@ -21,7 +21,7 @@ class Manage extends Template
     public function __construct(
         Context $context,
         CustomerSession $customerSession,
-        CustomerRepositoryInterface $repository,
+        LoyaltyProgramRepositoryInterface $repository,
         SearchCriteriaBuilder $searchCriteriaBuilder
     ) {
         parent::__construct($context);
@@ -44,12 +44,8 @@ class Manage extends Template
     public function getCustomerById()
     {
         $sessionCustomerId = $this->getSessionCustomerId();
-        //$customerInfa = $this->customerSession->getCustomerData();
         $customerData = $this->repository->getById((int)$sessionCustomerId);
-        //$customerInfo = $customerData->getData();
-        $getCustomAttributes = $customerData->getCustomAttributes();
-        $getCustomAttributes = $getCustomAttributes;
-        $customerData = $customerData;
+        $points = $customerData->getData('loyalty_points');
 
         return $customerData;
     }

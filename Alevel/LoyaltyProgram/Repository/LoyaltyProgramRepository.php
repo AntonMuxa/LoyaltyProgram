@@ -71,21 +71,4 @@ class LoyaltyProgramRepository implements LoyaltyProgramRepositoryInterface
 
         return $customer;
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function getList(SearchCriteriaInterface $searchCriteria): SearchResultsInterface
-    {
-        $collection = $this->collection->create();
-
-        $this->processor->process($searchCriteria, $collection);
-        /** @var SearchResultsInterface $searchResult */
-        $searchResult = $this->searchResultsFactory->create();
-        $searchResult->setSearchCriteria($searchCriteria);
-        $searchResult->setTotalCount($collection->getSize());
-        $searchResult->setItems($collection->getItems());
-
-        return $searchResult;
-    }
 }
