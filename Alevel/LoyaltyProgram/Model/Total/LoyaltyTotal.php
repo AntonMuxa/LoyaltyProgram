@@ -7,6 +7,7 @@ namespace Alevel\LoyaltyProgram\Model\Total;
 
 use Alevel\LoyaltyProgram\Api\Repository\LoyaltyProgramRepositoryInterface;
 use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Quote\Model\QuoteValidator;
 
 
 class LoyaltyTotal extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
@@ -26,13 +27,22 @@ class LoyaltyTotal extends \Magento\Quote\Model\Quote\Address\Total\AbstractTota
      */
     protected $_customerSession;
 
+    /**
+     * @var \Alevel\LoyaltyProgram\Api\Repository\LoyaltyProgramRepositoryInterface
+     */
+    private $repository;
+
+    private $points;
+
     public function __construct(
-        \Magento\Customer\Model\Session $session,
-        \Magento\Quote\Model\QuoteValidator $quoteValidator
+        QuoteValidator $quoteValidator,
+        CustomerSession $session,
+        LoyaltyProgramRepositoryInterface $repository
     )
     {
         $this->quoteValidator = $quoteValidator;
         $this->_customerSession = $session;
+        $this->repository = $repository;
     }
     public function collect(
         \Magento\Quote\Model\Quote $quote,
@@ -40,15 +50,17 @@ class LoyaltyTotal extends \Magento\Quote\Model\Quote\Address\Total\AbstractTota
         \Magento\Quote\Model\Quote\Address\Total $total
     ) {
         parent::collect($quote, $shippingAssignment, $total);
-        /*$items = $shippingAssignment->getItems();
+        $items = $shippingAssignment->getItems();
         if (!count($items)) {
             return $this;
-        }*/
+        }
 
-        $balance = -100;
-       /* if($this->customerLoggedIn() && true) {
-            $balance = -100;
-        }*/
+        $balance = 0;
+        if($this->_customerSession->isLoggedIn()) {
+            $customerData = $this->repository->getById((int)$this->_customerSession->getId());
+            $this->points = $customerData->getData('loyalty_points');
+            $balance = -$this->points;
+        }
 
         $total->setTotalAmount('loyalty', $balance);
         $total->setBaseTotalAmount('loyalty', $balance);
@@ -62,19 +74,6 @@ class LoyaltyTotal extends \Magento\Quote\Model\Quote\Address\Total\AbstractTota
         return $this;
     }
 
-    protected function clearValues(Address\Total $total)
-    {
-        $total->setTotalAmount('subtotal', 0);
-        $total->setBaseTotalAmount('subtotal', 0);
-        $total->setTotalAmount('tax', 0);
-        $total->setBaseTotalAmount('tax', 0);
-        $total->setTotalAmount('discount_tax_compensation', 0);
-        $total->setBaseTotalAmount('discount_tax_compensation', 0);
-        $total->setTotalAmount('shipping_discount_tax_compensation', 0);
-        $total->setBaseTotalAmount('shipping_discount_tax_compensation', 0);
-        $total->setSubtotalInclTax(0);
-        $total->setBaseSubtotalInclTax(0);
-    }
     /**
      * @param \Magento\Quote\Model\Quote $quote
      * @param Address\Total $total
@@ -90,11 +89,10 @@ class LoyaltyTotal extends \Magento\Quote\Model\Quote\Address\Total\AbstractTota
      */
     public function fetch(\Magento\Quote\Model\Quote $quote, \Magento\Quote\Model\Quote\Address\Total $total)
     {
-        $loyaltypoints = $total->getLoyalty();
         return [
             'code' => 'loyalty',
             'title' => 'Loyalty Total',
-            'value' => $loyaltypoints
+            'value' => $this->points
         ];
     }
 
@@ -105,11 +103,6 @@ class LoyaltyTotal extends \Magento\Quote\Model\Quote\Address\Total\AbstractTota
      */
     public function getLabel()
     {
-        return __('Loyalty');
-    }
-
-    public function customerLoggedIn()
-    {
-        return (bool)$this->httpContext->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH);
+        return __('Loyalty Discount');
     }
 }
