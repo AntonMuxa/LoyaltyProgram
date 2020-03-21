@@ -4,7 +4,7 @@
  */
 define(
     [
-        'Alevel_LoyaltyProgram/js/view/checkout/cart/totals/loyalty'
+        'Alevel_LoyaltyProgram/js/view/checkout/summary/loyalty'
     ],
     function (Component) {
         'use strict';

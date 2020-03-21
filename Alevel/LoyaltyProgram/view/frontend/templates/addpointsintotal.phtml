@@ -1,6 +1,9 @@
+<?php
+/** @var Alevel\LoyaltyProgram\Block\AddPointsInTotal $block */
+?>
 <div class="col-mp mp-12">
-    <input type="checkbox" name="countpoints" data-bind="checked: isCountPoints, attr: {id: 'place-order-countpoints'}"/>
-    <label data-bind="attr: {for: 'place-order-countpoints'}"><span data-bind="i18n: 'Use points'"></span></label>
+    <input id="place-order-countpoints" type="checkbox" name="countpoints" <?php echo $block->isChecked() ? 'checked="checked"' : ''; ?> />
+    <label for="place-order-countpoints"><span>Use points</span></label>
 </div>
 <script>
     require(['jquery'], function ($) {
