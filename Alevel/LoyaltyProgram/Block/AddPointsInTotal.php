@@ -41,7 +41,10 @@ class AddPointsInTotal extends Template
 
     public function isChecked()
     {
-        $checkbox = true;
-        return $checkbox;
+        return $this->customerSession->getUsePoints();
+    }
+
+    public function isLogged() {
+        return $this->customerSession->isLoggedIn();
     }
 }

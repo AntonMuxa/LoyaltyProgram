@@ -1,27 +1,26 @@
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
-/*jshint browser:true jquery:true*/
-/*global alert*/
 define(
     [
         'Magento_Checkout/js/view/summary/abstract-total',
         'Magento_Checkout/js/model/quote',
         'Magento_Catalog/js/price-utils',
-        'Magento_Checkout/js/model/totals'
+        'Magento_Checkout/js/model/totals',
+        'Magento_Customer/js/model/customer'
     ],
-    function (Component, quote, priceUtils, totals) {
+    function (
+        Component,
+        quote,
+        priceUtils,
+        totals,
+        customer
+        ) {
         "use strict";
         return Component.extend({
             defaults: {
-                isFullTaxSummaryDisplayed: window.checkoutConfig.isFullTaxSummaryDisplayed || false,
                 template: 'Alevel_LoyaltyProgram/checkout/summary/loyalty'
             },
             totals: quote.getTotals(),
-            isTaxDisplayedInGrandTotal: window.checkoutConfig.includeTaxInGrandTotal || false,
             isDisplayed: function() {
-                return this.isFullMode();
+                return (this.isFullMode() && customer.isLoggedIn());
             },
             getValue: function() {
                 var price = 0;
@@ -33,7 +32,7 @@ define(
             getBaseValue: function() {
                 var price = 0;
                 if (this.totals()) {
-                    price = this.totals().base_loyalty;
+                    price = this.totals()['base_loyalty'];
                 }
                 return priceUtils.formatPrice(price, quote.getBasePriceFormat());
             }

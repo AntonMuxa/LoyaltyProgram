@@ -1,12 +1,9 @@
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
 define(
     [
-        'Alevel_LoyaltyProgram/js/view/checkout/summary/loyalty'
+        'Alevel_LoyaltyProgram/js/view/checkout/summary/loyalty',
+        'Magento_Customer/js/model/customer',
     ],
-    function (Component) {
+    function (Component, customer) {
         'use strict';
 
         return Component.extend({
@@ -15,7 +12,7 @@ define(
              * @override
              */
             isDisplayed: function () {
-                return true;
+                return (this.isFullMode() && customer.isLoggedIn());
             }
         });
     }

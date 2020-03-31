@@ -18,7 +18,7 @@
                                     <item name="sortOrder" xsi:type="string">20</item>
                                     <item name="config" xsi:type="array">
                                         <item name="template" xsi:type="string">Alevel_LoyaltyProgram/checkout/cart/totals/loyalty</item>
-                                        <item name="title" xsi:type="string" translate="true">Loyalty</item>
+                                        <item name="title" xsi:type="string" translate="true">Loyalty Points</item>
                                     </item>
                                 </item>
                             </item>
@@ -27,11 +27,13 @@
                 </argument>
             </arguments>
         </referenceBlock>
+        <referenceContainer name="checkout.cart.totals.container">
         <block class="Alevel\LoyaltyProgram\Block\AddPointsInTotal"
                name="checkout.cart.addpointsintotal"
                as="addpointsintotal"
                after="checkout.cart.totals"
                cacheable="false"
-               template="Alevel_LoyaltyProgram::addpointsintotal.phtml"/>
+               template="Alevel_LoyaltyProgram::checkout_cart_addpointsintotal.phtml"/>
+        </referenceContainer>
     </body>
 </page>
