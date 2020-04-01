@@ -61,8 +61,7 @@ class Loyalty extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
             return $this;
         }
 
-        $customerData = $this->repository->getById($quote->getCustomerId());
-        $points = $customerData->getData('loyalty_points');
+        $points = $this->repository->getPoints($quote->getCustomerId());
         $balance = $this->convertToQuoteCurrency($quote, $points);
 
         if($this->customerSession->getUsePoints()) {
@@ -71,12 +70,13 @@ class Loyalty extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
         }
 
         $total->setLoyalty($balance);
-        $total->getLoyalty();
         $total->setBaseLoyalty($balance);
 
         return $this;
 
     }
+
+
 
     /**
      * @param \Magento\Quote\Model\Quote $quote
@@ -86,11 +86,11 @@ class Loyalty extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
 
     public function fetch(\Magento\Quote\Model\Quote $quote, \Magento\Quote\Model\Quote\Address\Total $total)
     {
-        $total = $total;
+        $points = $this->repository->getPoints($quote->getCustomerId());
         return [
             'code' =>  $this->getCode(),
             'title' => $this->getLabel(),
-            'value' => $total->getLoyalty()
+            'value' => $points
         ];
     }
 

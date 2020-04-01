@@ -1,6 +1,6 @@
 <!-- ko if: isDisplayed() -->
 <div class="col-mp mp-12">
-    <input type="checkbox" name="use_points" data-bind="checked: isCountPoints, change: usePoints, attr: {id: 'use-points'}"/>
+    <input type="checkbox" name="use_points" data-bind="checked: isCountPoints, event: { change: usePoints }, attr: {id: 'use-points'}"/>
     <label data-bind="attr: {for: 'use-points'}"><span data-bind="i18n: 'Use points'"></span></label>
 </div>
 <!-- /ko -->

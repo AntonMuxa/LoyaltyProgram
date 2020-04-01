@@ -71,4 +71,9 @@ class LoyaltyProgramRepository implements LoyaltyProgramRepositoryInterface
 
         return $customer;
     }
+
+    public function getPoints(int $id) {
+        $customerData = $this->getById($id);
+        return $customerData->getData('loyalty_points');
+    }
 }

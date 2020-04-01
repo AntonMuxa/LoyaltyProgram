@@ -57,9 +57,8 @@ class Points extends AbstractAccount
             $use_points = $this->getRequest()->getParam('use_points');
             $quoteId = $this->getRequest()->getParam('quote_id');
             $this->customerSession->setUsePoints($use_points === 'true');
-            //$quote = $this->cartRepository->get($quoteId);
-            //$quote->collectTotals()->save();
-
+            $quote = $this->cartRepository->get($quoteId);
+            $quote->collectTotals()->save();
 
             $response = [
                 'errors' => false,

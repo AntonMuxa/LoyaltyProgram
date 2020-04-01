@@ -4,12 +4,8 @@ namespace Alevel\LoyaltyProgram\Model\Checkout;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
 use Magento\Framework\UrlInterface;
+use Magento\Customer\Model\Session as CustomerSession;
 
-/**
- * Class ConfigProvider.
- *
- * @package Atom\SurchargePayment\Model\Checkout
- */
 class ConfigProvider implements ConfigProviderInterface
 {
     /**
@@ -18,14 +14,21 @@ class ConfigProvider implements ConfigProviderInterface
     private $urlBuilder;
 
     /**
+     * @var \Magento\Customer\Model\Session
+     */
+    protected $customerSession;
+
+    /**
      * ConfigProvider constructor.
      *
      * @param UrlInterface $urlBuilder
      */
     public function __construct(
-        UrlInterface $urlBuilder
+        UrlInterface $urlBuilder,
+        CustomerSession $customerSession
     ) {
         $this->urlBuilder = $urlBuilder;
+        $this->customerSession = $customerSession;
     }
 
     /**
@@ -36,7 +39,8 @@ class ConfigProvider implements ConfigProviderInterface
     public function getConfig() : array
     {
         return [
-            'manage_points' => $this->getRecollectTotalsPath()
+            'managePointsPath' => $this->getRecollectTotalsPath(),
+            'getUsePoints' => $this->getUsePoints()
         ];
     }
 
@@ -47,6 +51,11 @@ class ConfigProvider implements ConfigProviderInterface
      */
     private function getRecollectTotalsPath(): string
     {
-        return $this->urlBuilder->getUrl('loyaltyprogram/manage/points', array('_secure'=>true));
+        return $this->urlBuilder->getUrl('loyaltyprogram/manage/points');
+    }
+
+    private function getUsePoints()
+    {
+        return $this->customerSession->getUsePoints();
     }
 }
