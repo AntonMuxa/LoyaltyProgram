@@ -1,0 +1,17 @@
+<?php
+/** @var Alevel\LoyaltyProgram\Block\Manage $block*/
+?>
+<?php echo 'Available points ' . $block->getPoints(); ?><br><br>
+<?php echo 'Invite friend '; ?> <a id="ref-link" href="javascript://" data-href="<?php echo $block->getRefferalLink(); ?>"><?php echo $block->getRefferalLink(); ?> (click to copy)</a><br><br>
+<script>
+    require(['jquery'], function ($) {
+        $("#ref-link").on('click',function(e) {
+            let $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(this).data('href')).select();
+            document.execCommand("copy");
+            $temp.remove();
+            alert('link copied to buffer');
+        });
+    });
+</script>
