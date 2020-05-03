@@ -10,4 +10,7 @@
                 type="Alevel\LoyaltyProgram\Repository\LoyaltyProgramRepository" />
     <preference for="Alevel\LoyaltyProgram\Api\Model\LoyaltyProgramInterface"
                 type="Alevel\LoyaltyProgram\Model\LoyaltyProgram" />
+    <type name="Magento\Customer\Api\GroupRepositoryInterface">
+        <plugin name="alevel_loyaltyprogram_grouprepository_getbyid" type="\Alevel\LoyaltyProgram\Plugin\GroupRepositoryGetByIdPlugin" sortOrder="1"/>
+    </type>
 </config>

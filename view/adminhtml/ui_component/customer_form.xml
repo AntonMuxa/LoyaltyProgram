@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="loyalty_program">
+        <settings>
+            <label translate="true">Loyalty Program</label>
+        </settings>
+        <field name="loyalty_points">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">loyalty_program</item>
+                    <item name="label" xsi:type="string">Loyalty Points</item>
+                    <item name="value" xsi:type="object">Alevel\LoyaltyProgram\Model\Source\FieldsValues</item>
+                </item>
+            </argument>
+        </field>
+        <field name="loyalty_parent_ref">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">loyalty_program</item>
+                    <item name="label" xsi:type="string">Loyalty Referral</item>
+                    <item name="value" xsi:type="object">Alevel\LoyaltyProgram\Model\Source\FieldsValues</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

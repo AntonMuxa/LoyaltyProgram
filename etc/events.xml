@@ -8,4 +8,7 @@
     <event name="customer_login">
         <observer name="alevel_loyaltyprogram_customer_login_observer" instance="Alevel\LoyaltyProgram\Observer\CustomerLogin" />
     </event>
+    <event name="checkout_submit_all_after">
+        <observer name="alevel_loyaltyprogram_order_place_after" instance="Alevel\LoyaltyProgram\Observer\OrderPlaceAfter" />
+    </event>
 </config>

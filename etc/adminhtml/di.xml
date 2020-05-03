@@ -3,4 +3,10 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\Reporting">
         <plugin name="customer_grid_collection" type="\Alevel\LoyaltyProgram\Model\ResourceModel\Customer\Grid"/>
     </type>
+    <type name="Magento\Customer\Block\Adminhtml\Group\Edit\Form">
+        <plugin name="alevel_loyaltyprogram_adminhtml_group_edit_form" type="\Alevel\LoyaltyProgram\Plugin\Block\Adminhtml\Group\Edit\Form" sortOrder="1"/>
+    </type>
+    <type name="Magento\Customer\Controller\Adminhtml\Group\Save">
+        <plugin name="alevel_loyaltyprogram_adminhtml_group_save_form" type="\Alevel\LoyaltyProgram\Plugin\Controller\Adminhtml\Group\Save" sortOrder="1"/>
+    </type>
 </config>

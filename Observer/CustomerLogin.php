@@ -24,9 +24,6 @@ class CustomerLogin implements \Magento\Framework\Event\ObserverInterface
      * @var CustomCookie
      */
     private $customCookie;
-    /**
-     * @inheritDoc
-     */
 
     public function __construct(
         LoyaltyProgramRepositoryInterface $repository,

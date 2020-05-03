@@ -6,4 +6,8 @@
         <column xsi:type="int" name="loyalty_parent_ref" padding="11" unsigned="true" nullable="false" identity="false"
                 comment="loyalty parent ref"/>
     </table>
+    <table name="customer_group">
+        <column xsi:type="int" name="loyalty_percent" padding="11" unsigned="true" nullable="false" identity="false"
+                comment="loyalty percent"/>
+    </table>
 </schema>

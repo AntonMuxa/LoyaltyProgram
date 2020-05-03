@@ -9,8 +9,6 @@
  */
 namespace Alevel\LoyaltyProgram\Block\Sales\Order;
 
-
-
 class Loyalty extends \Magento\Framework\View\Element\Template
 {
     /**
@@ -99,29 +97,25 @@ class Loyalty extends \Magento\Framework\View\Element\Template
      */
     public function initTotals()
     {
-
         $parent = $this->getParentBlock();
         $this->_order = $parent->getOrder();
         $this->_source = $parent->getSource();
 
         $store = $this->getStore();
 
-        $fee = new \Magento\Framework\DataObject(
+        $loyalty = new \Magento\Framework\DataObject(
             [
                 'code' => 'loyalty',
                 'strong' => false,
-                'value' => 100,
-                //'value' => $this->_source->getFee(),
+                'value' => 33,
                 'label' => __('Loyalty'),
             ]
         );
 
-        $parent->addTotal($fee, 'loyalty');
+        //$parent->addTotal($fee, 'loyalty');
         // $this->_addTax('grand_total');
-        $parent->addTotal($fee, 'loyalty');
-
+        $parent->addTotal($loyalty, 'loyalty');
 
         return $this;
     }
-
 }
