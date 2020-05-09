@@ -107,7 +107,7 @@ class Loyalty extends \Magento\Framework\View\Element\Template
             [
                 'code' => 'loyalty',
                 'strong' => false,
-                'value' => 33,
+                'value' => 333,
                 'label' => __('Loyalty'),
             ]
         );

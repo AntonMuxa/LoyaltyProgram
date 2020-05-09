@@ -59,19 +59,34 @@ class Loyalty extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
             return $this;
         }
 
+        $quote->setLoyalty(0);
+        $quote->setBaseLoyalty(0);
+
         $points = $this->repository->getPoints($quote->getCustomerId());
         $balance = $this->convertToQuoteCurrency($quote, $points);
+        $subtotal = (float)$quote->getData('subtotal');
         $grand_total = (float)$quote->getData('grand_total');
 
         $total->setLoyalty($balance);
         $total->setBaseLoyalty($balance);
 
+        $quote_loyalty = $quote->getData('loyalty');
+        $total_loyalty = $total->getData('loyalty');
+
         if ($this->customerSession->getUsePoints()) {
-            if ($grand_total > 0 && $grand_total <= $balance) {
-                $balance = $grand_total;
+            if ($grand_total > 0 && $subtotal <= $balance) {
+                $balance = $subtotal;
+                if (($grand_total - $balance) < 0) {
+                    $balance = $grand_total;
+                }
             } elseif ($grand_total == 0) {
                 $balance = 0;
             }
+
+            $balance = $balance;
+
+            $quote->setLoyalty($balance);
+            $quote->setBaseLoyalty($balance);
 
             $total->setTotalAmount($this->getCode(), -$balance);
             $total->setBaseTotalAmount($this->getCode(), -$balance);

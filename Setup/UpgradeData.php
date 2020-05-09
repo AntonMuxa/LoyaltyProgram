@@ -56,7 +56,7 @@ class UpgradeData implements UpgradeDataInterface
         $setup->endSetup();
     }
 
-    public function createLoyaltyPointsAttribute($setup)
+    private function createLoyaltyPointsAttribute($setup)
     {
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
         $attributeCode = 'loyalty_points';
