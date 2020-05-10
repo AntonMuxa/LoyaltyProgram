@@ -1,8 +1,10 @@
 <?php
 
-namespace Alevel\LoyaltyProgram\Block\Sales\Order;
+namespace Alevel\LoyaltyProgram\Block\Order;
 
-class Loyalty extends \Magento\Framework\View\Element\Template
+use Magento\Framework\View\Element\AbstractBlock;
+
+class Loyalty extends AbstractBlock
 {
     /**
      * Tax configuration model
@@ -15,11 +17,6 @@ class Loyalty extends \Magento\Framework\View\Element\Template
      * @var Order
      */
     protected $_order;
-
-    /**
-     * @var \Magento\Framework\DataObject
-     */
-    protected $_source;
 
     /**
      * @param \Magento\Framework\View\Element\Template\Context $context
@@ -43,20 +40,6 @@ class Loyalty extends \Magento\Framework\View\Element\Template
     public function displayFullSummary()
     {
         return true;
-    }
-
-    /**
-     * Get data (totals) source model
-     *
-     * @return \Magento\Framework\DataObject
-     */
-    public function getSource()
-    {
-        return $this->_source;
-    }
-    public function getStore()
-    {
-        return $this->_order->getStore();
     }
 
     /**
