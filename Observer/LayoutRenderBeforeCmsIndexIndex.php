@@ -20,11 +20,6 @@ class LayoutRenderBeforeCmsIndexIndex implements \Magento\Framework\Event\Observ
     private $request;
 
     /**
-     * @var CustomerSession
-     */
-    private $customerSession;
-
-    /**
      * @var CustomCookie
      */
     private $customCookie;
@@ -32,12 +27,10 @@ class LayoutRenderBeforeCmsIndexIndex implements \Magento\Framework\Event\Observ
     public function __construct(
         RequestInterface $request,
         LoyaltyProgramRepositoryInterface $repository,
-        CustomerSession $customerSession,
         CustomCookie $customCookie
     ) {
         $this->request = $request;
         $this->repository = $repository;
-        $this->customerSession = $customerSession;
         $this->customCookie = $customCookie;
     }
 
@@ -51,7 +44,7 @@ class LayoutRenderBeforeCmsIndexIndex implements \Magento\Framework\Event\Observ
                 $this->customCookie->setCustomCookie('ref-link', $ref_link);
             }
         }
-
+        $var = $_COOKIE;
         return $this;
     }
 }

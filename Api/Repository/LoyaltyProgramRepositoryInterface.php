@@ -14,9 +14,21 @@ interface LoyaltyProgramRepositoryInterface
      */
     public function getById(int $id) : LoyaltyProgramInterface;
 
+    /**
+     * @param string $email
+     * @return LoyaltyProgramInterface
+     */
     public function getByEmail(string $email): LoyaltyProgramInterface;
 
+    /**
+     * @param LoyaltyProgramInterface $customer
+     * @return LoyaltyProgramInterface
+     */
     public function save(LoyaltyProgramInterface $customer): LoyaltyProgramInterface;
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getPoints($id);
 }

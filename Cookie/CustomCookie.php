@@ -31,12 +31,12 @@ class CustomCookie
         $publicCookieMetadata->setDurationOneYear();
         $publicCookieMetadata->setPath('/');
         $publicCookieMetadata->setHttpOnly(false);
-
-        return $this->cookieManager->setPublicCookie(
+        $return = $this->cookieManager->setPublicCookie(
             $name,
             $value,
             $publicCookieMetadata
         );
+        return $return;
     }
 
     /** Get Custom Cookie using */

@@ -42,6 +42,7 @@ class CustomerLogin implements \Magento\Framework\Event\ObserverInterface
             $customerData = $this->repository->getByEmail($ref_link);
             $customerId = $customerData->getData('entity_id');
             if ($customerId > 0) {
+                $customerData = $this->repository->getById($this->customerSession->getCustomerId());
                 $loyaltyParentRef = $customerData->getData('loyalty_parent_ref');
                 if ($customerId > 0 && $loyaltyParentRef == 0) {
                     $customerData->setData('loyalty_parent_ref', $customerId);

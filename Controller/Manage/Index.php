@@ -1,14 +1,11 @@
 <?php
 
-
 namespace Alevel\LoyaltyProgram\Controller\Manage;
 
-use Magento\Framework\App\ResponseInterface;
-use Magento\Framework\Controller\ResultInterface;
-use Magento\Framework\App\Action\Action;
-use Magento\Framework\Controller\ResultFactory;
-use Magento\Customer\Model\Session;
 use Magento\Customer\Controller\AbstractAccount;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Controller\ResultInterface;
 
 /**
  * Class Show.

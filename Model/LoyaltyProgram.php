@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Alevel\LoyaltyProgram\Model;
-
 
 use Alevel\LoyaltyProgram\Api\Model\LoyaltyProgramInterface;
 use Alevel\LoyaltyProgram\Model\ResourceModel\LoyaltyProgram as ResourceModel;
